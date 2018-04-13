@@ -6,7 +6,8 @@
 //  Copyright © 2018 Ivan Kozaderov. All rights reserved.
 //
 //#define PUPIL
-#define STUDENT
+//#define STUDENT
+#define MASTER
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -19,6 +20,9 @@
 @property(nonatomic,weak) UIView* view6;
 @property(nonatomic,weak) UIView* view7;
 @property(nonatomic,weak) UIView* view8;
+
+@property(nonatomic,weak) UIImageView* imageView;
+
 @end
 
 @implementation ViewController
@@ -88,9 +92,30 @@
   [self moveRects];
     
 #endif
-    
-}
+#ifdef MASTER
 
+    
+    UIImageView* view = [[UIImageView alloc] initWithFrame:CGRectMake(200 , 200, 100, 100)];
+    view.backgroundColor = [UIColor clearColor];
+    
+    UIImage* image  = [UIImage imageNamed:@"1.png"];
+    UIImage* image1 = [UIImage imageNamed:@"2.png"];
+    UIImage* image2 = [UIImage imageNamed:@"3.png"];
+    
+    NSArray* images = [NSArray arrayWithObjects:image,image1,image,image2, nil];
+    view.animationImages   = images;
+    view.animationDuration = 1.f;
+    [self.view addSubview:view];
+    
+    self.imageView = view;
+    
+    [view startAnimating];
+
+}
+#endif
+
+
+#ifdef STUDENT
 
 -(CGPoint)centerOfView:(UIView*)view nearCorner:(Corners)corners{
    
@@ -194,6 +219,7 @@
     
  
 }
+#endif
 
 
 -(UIColor*)randomColor{
